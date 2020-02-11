@@ -1,31 +1,39 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 import { animated, useSpring, config } from 'react-spring'
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: #1b1b1b;
+    color: white;
+  }
+`
 
 function App({ className }) {
   const h1Props = useSpring({
     transform: 'translateY(0)',
     opacity: 1,
     from: { transform: 'translateY(64px)', opacity: 0 },
-    config: config.slow,
+    config: config.molasses,
   })
 
   const pProps = useSpring({ opacity: 1, from: { opacity: 0 }, delay: 1500 })
 
   return (
-    <div className={className}>
-      <animated.h1 style={h1Props}>Assembly</animated.h1>
-      <animated.p style={pProps}>Coming Soon</animated.p>
-    </div>
+    <>
+      <GlobalStyle />
+      <div className={className}>
+        <animated.h1 style={h1Props}>Assembly</animated.h1>
+        <animated.p style={pProps}>Coming Soon</animated.p>
+      </div>
+    </>
   )
 }
 
 const StyledApp = styled(App)`
-  background-color: #1b1b1b;
   font-family: 'Open Sans', sans-serif;
   height: 100vh;
   width: 100vw;
-  color: white;
 
   display: flex;
   align-items: center;
